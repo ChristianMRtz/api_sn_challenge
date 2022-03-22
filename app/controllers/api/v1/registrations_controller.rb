@@ -5,8 +5,6 @@ class Api::V1::RegistrationsController < ApplicationController
     user = User.create!(
       email: params[:user][:email],
       username: params[:user][:username],
-      name: params[:user][:name],
-      lastname: params[:user][:lastname],
       password: params[:user][:password],
       password_confirmation: params[:user][:password_confirmation],
     )

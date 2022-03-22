@@ -9,7 +9,6 @@ puts "Seeding User..."
 user = User.create([
   { 
     email: "user@xd.com", username: "user1",
-    name: "UserName", lastname: "UserLastName", 
     password: "123user", password_confirmation: "123user"
   },
 ])
