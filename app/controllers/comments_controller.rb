@@ -1,15 +1,16 @@
-class Api::V1::CommentsController < ApplicationController
+class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show update destroy ]
 
   # GET /comments
   def index
     @comments = Comment.all
-    render json: @comments
+    render json: @comments.as_json(include: { user: { only: [:username, :email] }})
   end
 
   # GET /comments/1
   def show
-    render json: @comment
+    render json: @comment.attributes.merge({ username: @comment.user.username, 
+                                              email: @comment.user.email })
   end
 
   # POST /comments

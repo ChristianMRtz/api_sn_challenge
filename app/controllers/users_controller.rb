@@ -1,16 +1,16 @@
-class Api::V1::UsersController < ApplicationController
+class UsersController < ApplicationController
   before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users
   def index
     @users = User.all
 
-    render json: @users.to_json(only: [:id, :email, :username])
+    render json: @users.to_json(only: [:id, :email, :username, :avatar])
   end
 
   # GET /users/1
   def show
-    render json: @user.to_json(only: [:id, :email, :username])
+    render json: @user.to_json(only: [:id, :email, :username, :avatar])
   end
 
   # POST /users
