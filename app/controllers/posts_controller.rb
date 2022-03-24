@@ -4,13 +4,15 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
-    render json: @posts.as_json(include: { user: { only: [:username, :email, :avatar] }})
+    render json: @posts.as_json(include: { user: { only: [:id, :username, :email, :avatar] },
+                                           comments:{ include: {user:{only: [:username, :email, :avatar]} }  } })
   end
 
   # GET /posts/1
   def show
     render json: @post.attributes.merge(email: @post.user.email,
                                         username: @post.user.username,
+                                        user_id: @post.user.id,
                                         comments: @post.comments.as_json(include: { user: { only: [:username, :email, :avatar]}}),
                                         dislikes: @post.dislikes,
                                         avatar: @post.user.avatar)                                       

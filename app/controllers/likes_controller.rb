@@ -1,17 +1,20 @@
 class LikesController < ApplicationController
+  def index
+    @likes = Like.all
+    render json: @likes.to_json(only: [:id, :user_id, :post_id])
+  end
   def create
-    @like = current_user.likes.new(like_params)
+    @like = Like.new(:user_id, :post_id)
     if !@like.save
       render json: @like.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
   def destroy
-    @like = current_user.likes.find(params[:id])
-    post = @like.post
     @like.destroy
   end
   private
-    def like_params
-      params.require(:like).permit(:post_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @like = Like.find(params[:id])
+  end
 end

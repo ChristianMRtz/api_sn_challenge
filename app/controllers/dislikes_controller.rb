@@ -1,17 +1,20 @@
 class DislikesController < ApplicationController
+  def index
+    @dislikes = Dislike.all
+    render json: @dislikes.to_json(only: [:id, :user_id, :post_id])
+  end
   def create
-    @dislike = current_user.dislikes.new(dislike_params)
+    @dislike = Dislike.new(:user_id, :post_id)
     if !@dislike.save
       render json: @dislike.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
   def destroy
-    @dislike = current_user.likes.find(params[:id])
-    post = @dislike.post
     @dislike.destroy
   end
   private
-    def dislike_params
-      params.require(:dislike).permit(:post_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @dislike = Dislike.find(params[:id])
+  end
 end

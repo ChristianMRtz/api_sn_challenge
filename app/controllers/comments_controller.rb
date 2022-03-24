@@ -9,8 +9,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   def show
-    render json: @comment.attributes.merge({ username: @comment.user.username, 
-                                              email: @comment.user.email })
+    render json: @comment
   end
 
   # POST /comments
@@ -46,6 +45,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:body, :user_id, :post_id)
+      params.require(:comment).permit(:body_comment, :user_id, :post_id)
     end
 end
