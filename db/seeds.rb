@@ -61,3 +61,4 @@ puts "Created #{Post.count} Posts"
 puts "Created #{Comment.count} Comments"
 puts "Created #{Like.count} Likes"
 puts "Seeding Done!"
+# This file should contain all the record creation needed to seed the database with its default values.
