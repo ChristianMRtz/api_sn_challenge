@@ -2,25 +2,30 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 require 'faker'
 
-puts "Seeding User..."
+puts "Deleting all data..."
+Like.destroy_all
+Comment.destroy_all
+Post.destroy_all
+User.destroy_all
+
+puts "Seeding User admin..."
 user = User.create([
   { 
     email: "admin", 
-    username: "useradmin", 
+    username: "admin", 
     password: "admin", 
     password_confirmation: "admin",
     avatar: Faker::Avatar.image
   },
 ])
-puts "Seeding Post..."
+puts "Seeding Admin Post..."
 post = Post.create([
   { body: "Hi i'm posting this from my seed file", user_id: user.last.id },
 ])
-puts "Seeding Comment..."
+puts "Seeding Admin Comment..."
 Comment.create([
   { body_comment: "Hi i'm commenting", user_id: user.last.id, post_id: post.last.id },
 ])
-puts "Seeding Done!"
 
 20.times do |index|
   User.create!(email: Faker::Internet.free_email,
@@ -51,6 +56,8 @@ end
 #                 post_id: Post.all.sample.id)
 # end
 
-p "Created #{User.count} Users"
-p "Created #{Post.count} Posts"
-p "Created #{Comment.count} Comments"
+puts "Created #{User.count} Users"
+puts "Created #{Post.count} Posts"
+puts "Created #{Comment.count} Comments"
+puts "Created #{Like.count} Likes"
+puts "Seeding Done!"
