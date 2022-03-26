@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
   resources :likes, only: [:index, :create, :destroy]
