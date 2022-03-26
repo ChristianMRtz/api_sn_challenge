@@ -18,30 +18,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_24_002601) do
     t.text "body_comment"
     t.integer "user_id"
     t.integer "post_id"
-    t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "dislikes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_dislikes_on_post_id"
     t.index ["user_id", "post_id"], name: "index_dislikes_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_dislikes_on_user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -50,9 +50,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_24_002601) do
     t.integer "comments_count", default: 0, null: false
     t.integer "dislikes_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
