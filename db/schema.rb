@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_24_002601) do
   create_table "posts", force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
-    t.integer "comments_count", default: 0, null: false
+    t.integer "comments_count"
     t.integer "dislikes_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
     t.datetime "created_at", null: false
