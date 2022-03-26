@@ -1,15 +1,21 @@
-class Api::V1::PostsController < ApplicationController
+class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
 
   # GET /posts
   def index
     @posts = Post.all
-    render json: @posts
+    render json: @posts.as_json(include: { user: { only: [:id, :username, :email, :avatar] },
+                                           comments:{ include: {user:{only: [:username, :email, :avatar]} }  } })
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    render json: @post.attributes.merge(email: @post.user.email,
+                                        username: @post.user.username,
+                                        user_id: @post.user.id,
+                                        comments: @post.comments.as_json(include: { user: { only: [:username, :email, :avatar]}}),
+                                        dislikes: @post.dislikes,
+                                        avatar: @post.user.avatar)                                       
   end
 
   # POST /posts
@@ -45,6 +51,6 @@ class Api::V1::PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body)
+      params.require(:post).permit(:body, :user_id)
     end
 end

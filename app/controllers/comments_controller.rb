@@ -1,10 +1,10 @@
-class Api::V1::CommentsController < ApplicationController
+class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show update destroy ]
 
   # GET /comments
   def index
     @comments = Comment.all
-    render json: @comments
+    render json: @comments.as_json(include: { user: { only: [:username, :email] }})
   end
 
   # GET /comments/1
@@ -45,6 +45,6 @@ class Api::V1::CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body_comment, :user_id, :post_id)
     end
 end
