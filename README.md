@@ -1,24 +1,26 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# API SOCIAL NETWORK
 
-Things you may want to cover:
+This is an API made in Rails and Ruby 3.0.0
 
-* Ruby version
+## API Reference
 
-* System dependencies
+#### Get all items
 
-* Configuration
+```http
+All paths
+```
 
-* Database creation
+| Parameter | Type     | Data Response                |
+| :-------- | :------- | :-------------------------- |
+| `/users` | `string` |  id, email, username, avatar |
+| `/sessions` | `string` |  username, password |
+| `/registrations` | `string` |  username, email, password, password_confirmation |
+| `/posts` | `string` |  body, user_id, counters |
+| `/comments` | `string` |  body_comment, user_id, post_id, counters |
 
-* Database initialization
 
-* How to run the test suite
+## Author
 
-* Services (job queues, cache servers, search engines, etc.)
+- [@ChristianMRtz](https://www.github.com/ChristianMRtz)
 
-* Deployment instructions
-
-* ...
